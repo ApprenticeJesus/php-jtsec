@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
@@ -20,7 +19,7 @@ class ProjectController extends Controller
     }
 
     //Recogemos por formulario (en este caso usamos Postman para sustituir el front-end) 
-    //el identificador del proyecto a asignar, el id de usuario y el/los roles que tendrá.
+    //el identificador del proyecto a asignar, el id de usuario y el rol que tendrá.
     public function assignProject(Request $request)
     {
 

@@ -205,14 +205,15 @@ class ActivityController extends Controller
 
             foreach($activity_users as $rol){
 
-                if($rol == 'responsable'){
+                if($rol === 'responsable'){
                     $incidencesGranted = array_merge($incidencesGranted, $activity_data);
                 }
 
-                foreach($incidencesGranted as $incidenceGranted){
-                    echo "$incidenceGranted\n";
+                
                 }
             }
+            foreach($incidencesGranted as $incidenceGranted){
+                    echo "$incidenceGranted<br>";
         }
 
 

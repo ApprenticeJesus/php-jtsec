@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Incidence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,6 +17,7 @@ class IncidenceController extends Controller
     //el identificador de la incidencia a asignar, el id de usuario y el rol que tendrá.
     public function assignIncidence(Request $request)
     {
+        $user = new User;
 
         //Recogemos los datos por post
         $json = $request->input('json', null);
@@ -70,12 +72,24 @@ class IncidenceController extends Controller
                         $new_incd = ["incd$incd_num" => "$incd_num"];
 
                         if (!in_array($new_incd, $incd_array)) {
-                            //Asignamos valores
+                            //Asignamos valores en tabla users
                             $incd_array = array_merge($incd_array, $new_incd);
                             $incd_update = json_encode($incd_array);
                             $params_array['asgnd_incs'] = ['asgnd_incs' => $incd_update];
                             $db_incd_update = $params_array['asgnd_incs'];
                             User::where('id', $user->id)->update($db_incd_update);
+
+                            //Asignamos valores en tabla activities
+                            
+                            $incidence = Incidence::find($params_array['incid_id']);
+
+                            $new_user = [$user->name => $user->incid_rol];
+                            $users_array = json_decode($incidence['assgnd_users'], true);
+                            $users_array = array_merge($users_array, $new_user);
+                            $users_update = json_encode($users_array);
+                            $params_array['assgnd_users'] = ['assgnd_users' => $users_update];
+                            $db_users_update = $params_array['assgnd_users'];
+                            Incidence::where('id', $incidence->id)->update($db_users_update);
 
                             //Devolvemos array con el resultado
                             $data = array(
@@ -110,4 +124,6 @@ class IncidenceController extends Controller
         //Devolvemos respuesta
         return response()->json($data, $data['code']);
     }
+
+
 }

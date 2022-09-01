@@ -34,3 +34,7 @@ Route::get('/test', [App\Http\Controllers\PruebasController::class, 'testOrm']);
     Route::post('/api/asignarIncidencia', [App\Http\Controllers\IncidenceController::class, 'assignIncidence']);
     Route::post('/api/nuevaActividad', [App\Http\Controllers\ProjectController::class, 'addActivity']);
     Route::post('/api/nuevaIncidencia', [App\Http\Controllers\ActivityController::class, 'addIncidence']);
+
+    Route::get('/api/user/listarActividades/{id}', [App\Http\Controllers\UserController::class, 'getActivitiesByUser']);
+    Route::get('/api/project/listarUsuarios/{id}', [App\Http\Controllers\ProjectController::class, 'getUsersByProject']);
+    Route::get('/api/listarIncidenciasPermitidas/{id}', [App\Http\Controllers\ActivityController::class, 'listGrantedIncidences']);

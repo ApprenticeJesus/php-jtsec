@@ -15,12 +15,17 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array<int, string, array>
      */
     protected $fillable = [
+        'asgnd_prjs',
+        'asgnd_acts',
+        'asgnd_incs',
+        'proj_rol',
+        'act_rol',
+        'incid_rol',
         'name',
-        'email',
-        'password',
+        'email'
     ];
 
     /**

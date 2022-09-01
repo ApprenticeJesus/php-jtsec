@@ -28,5 +28,7 @@ Route::get('/test', [App\Http\Controllers\PruebasController::class, 'testOrm']);
     Route::get('/incidencia/pruebas', [App\Http\Controllers\IncidenceController::class, 'pruebas']);
 
     //Rutas de controladores
+    
+    Route::post('/api/assignProject', [App\Http\Controllers\ProjectController::class, 'assignProject']);
     Route::post('/api/nuevaActividad', [App\Http\Controllers\ProjectController::class, 'addActivity']);
     Route::post('/api/nuevaIncidencia', [App\Http\Controllers\ActivityController::class, 'addIncidence']);
